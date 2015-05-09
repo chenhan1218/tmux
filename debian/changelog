@@ -1,3 +1,12 @@
+tmux (2.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Drop all upstream patches.
+  * Enable libutempter support.
+  * Bump Standards-Version to 3.9.6.
+
+ -- Romain Francoise <rfrancoise@debian.org>  Sat, 09 May 2015 18:25:50 +0200
+
 tmux (1.9-6) unstable; urgency=medium
 
   * Cherry-pick fixes from upstream Git:
