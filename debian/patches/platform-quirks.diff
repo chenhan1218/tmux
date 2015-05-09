@@ -21,8 +21,8 @@ Forwarded: not-needed
  struct kinfo_proc	*cmp_procs(struct kinfo_proc *, struct kinfo_proc *);
  char			*osdep_get_name(int, char *);
 @@ -135,6 +137,7 @@
- char *
- osdep_get_cwd(int fd)
+ static char *
+ osdep_get_cwd_fallback(int fd)
  {
 +#if 0
  	static char		 wd[PATH_MAX];
@@ -38,8 +38,8 @@ Forwarded: not-needed
  
 --- a/compat.h
 +++ b/compat.h
-@@ -176,6 +176,22 @@
- #define TTY_NAME_MAX 32
+@@ -187,6 +187,22 @@
+ #define flock(fd, op) (0)
  #endif
  
 +#ifndef MAXPATHLEN
