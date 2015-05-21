@@ -2,7 +2,6 @@ Source: tmux
 Section: admin
 Priority: optional
 Maintainer: Romain Francoise <rfrancoise@debian.org>
-Uploaders: Karl Ferdinand Ebert <kfebert@gmail.com>
 Build-Depends: dpkg-dev (>= 1.16.1~),
                debhelper (>= 8.9.4~),
                libncurses5-dev,
