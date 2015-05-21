@@ -5,11 +5,9 @@ Date:   Tue May 19 08:48:37 2015 +0000
     In terminfo, sometimes cvvis implies cnorm and sometimes it doesn't, so
     don't assume it does. Fixes missing cursor with emacs-in-tmux-in-tmux.
 
-diff --git a/tty.c b/tty.c
-index a58ca93..63380c2 100644
 --- a/tty.c
 +++ b/tty.c
-@@ -507,14 +507,17 @@ tty_update_mode(struct tty *tty, int mode, struct screen *s)
+@@ -484,14 +484,17 @@
  		mode &= ~MODE_CURSOR;
  
  	changed = mode ^ tty->mode;
@@ -34,4 +32,4 @@ index a58ca93..63380c2 100644
 +		else
  			tty_putcode(tty, TTYC_CIVIS);
  	}
- 	if (s != NULL && tty->cstyle != s->cstyle) {
+ 	if (tty->cstyle != s->cstyle) {
