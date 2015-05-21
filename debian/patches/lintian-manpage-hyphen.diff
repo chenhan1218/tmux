@@ -13,6 +13,15 @@ Forwarded: not-needed
  .Ed
  .Pp
  When dealing with a session that doesn't contain sequential window indexes,
+@@ -498,7 +498,7 @@
+ .Pp
+ Will run:
+ .Bd -literal -offset indent
+-/bin/sh -c 'vi /etc/passwd'
++/bin/sh \-c 'vi /etc/passwd'
+ .Ed
+ .Pp
+ Additionally, the
 @@ -551,13 +551,13 @@
  .Nm
  commands include:
@@ -111,6 +120,27 @@ Forwarded: not-needed
  abc123
  .Ed
  .Pp
+@@ -2110,16 +2110,16 @@
+ is appended to the existing setting.
+ For example:
+ .Bd -literal -offset indent
+-set -g status-left "foo"
+-set -ag status-left "bar"
++set \-g status-left "foo"
++set \-ag status-left "bar"
+ .Ed
+ .Pp
+ Will result in
+ .Ql foobar .
+ And:
+ .Bd -literal -offset indent
+-set -g status-style "bg=red"
+-set -ag status-style "fg=blue"
++set \-g status-style "bg=red"
++set \-ag status-style "fg=blue"
+ .Ed
+ .Pp
+ Will result in a red background
 @@ -2574,7 +2574,7 @@
  Examples are:
  .Bd -literal -offset indent
@@ -138,7 +168,7 @@ Forwarded: not-needed
  For the meaning of the
  .Fl F
  flag, see the
-@@ -3874,22 +3874,22 @@
+@@ -3874,29 +3874,29 @@
  .Pp
  Changing the default prefix key:
  .Bd -literal -offset indent
@@ -166,3 +196,11 @@ Forwarded: not-needed
  .Ed
  .Pp
  Creating new key bindings:
+ .Bd -literal -offset indent
+ bind-key b set-option status
+ bind-key / command-prompt "split-window 'exec man %%'"
+-bind-key S command-prompt "new-window -n %1 'ssh %1'"
++bind-key S command-prompt "new-window \-n %1 'ssh %1'"
+ .Ed
+ .Sh SEE ALSO
+ .Xr pty 7
