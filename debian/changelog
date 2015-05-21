@@ -1,5 +1,7 @@
 tmux (2.0-2) UNRELEASED; urgency=medium
 
+  * Cherry-pick 2c53b23d59 from upstream Git to fix missing cursor in Emacs
+    when running in a nested session.
   * Remove Karl Ferdinand Ebert from Uploaders, with his permission.
 
  -- Romain Francoise <rfrancoise@debian.org>  Thu, 21 May 2015 19:59:39 +0200
