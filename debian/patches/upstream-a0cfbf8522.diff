@@ -1,0 +1,32 @@
+From a0cfbf8522b66ef9158cea6c803196f3ca058e8e Mon Sep 17 00:00:00 2001
+From: nicm <nicm>
+Date: Fri, 24 Apr 2015 20:58:44 +0000
+Subject: Set up signal handler earlier so that we don't get zombies,
+ reported by sobrado@.
+
+---
+ client.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+--- a/client.c
++++ b/client.c
+@@ -258,6 +258,9 @@
+ 		return (1);
+ 	}
+ 
++	/* Establish signal handlers. */
++	set_signals(client_signal);
++
+ 	/* Initialize the client socket and start the server. */
+ 	fd = client_connect(socket_path, cmdflags & CMD_STARTSERVER);
+ 	if (fd == -1) {
+@@ -300,9 +303,6 @@
+ 		tcsetattr(STDIN_FILENO, TCSANOW, &tio);
+ 	}
+ 
+-	/* Establish signal handlers. */
+-	set_signals(client_signal);
+-
+ 	/* Send identify messages. */
+ 	client_send_identify(flags);
+ 
