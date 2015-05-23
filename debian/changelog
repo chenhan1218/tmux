@@ -1,3 +1,14 @@
+tmux (2.0-3) unstable; urgency=medium
+
+  * Cherry-pick more fixes from upstream Git:
+    + f60d88cd24: use standout instead of italics for SGR3, like screen does
+      (closes: #756353)
+    + a0cfbf8522: set up client signal handler earlier to avoid zombies
+    + 8c0867fce0: use-after-free in paste/window-copy
+    + 70f783ff56: doc fix for set-titles-string
+
+ -- Romain Francoise <rfrancoise@debian.org>  Sat, 23 May 2015 12:40:52 +0200
+
 tmux (2.0-2) unstable; urgency=medium
 
   * Cherry-pick 2c53b23d59 from upstream Git to fix missing cursor in Emacs
