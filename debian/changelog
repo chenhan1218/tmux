@@ -1,3 +1,10 @@
+tmux (2.0-4) UNRELEASED; urgency=medium
+
+  * Adjust Homepage control field and watch file; tmux is now hosted on Github.
+  * Use cgit URL for Vcs-Browser.
+
+ -- Romain Francoise <rfrancoise@debian.org>  Sat, 06 Jun 2015 12:34:34 +0200
+
 tmux (2.0-3) unstable; urgency=medium
 
   * Cherry-pick more fixes from upstream Git:
