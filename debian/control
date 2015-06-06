@@ -10,7 +10,7 @@ Build-Depends: dpkg-dev (>= 1.16.1~),
                dh-autoreconf,
                libutempter-dev,
 Standards-Version: 3.9.6
-Homepage: http://tmux.sourceforge.net/
+Homepage: https://tmux.github.io/
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/tmux.git
 Vcs-Git: git://anonscm.debian.org/collab-maint/tmux.git
 
