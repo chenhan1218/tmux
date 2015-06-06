@@ -11,7 +11,7 @@ Build-Depends: dpkg-dev (>= 1.16.1~),
                libutempter-dev,
 Standards-Version: 3.9.6
 Homepage: https://tmux.github.io/
-Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/tmux.git
+Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/tmux.git/
 Vcs-Git: git://anonscm.debian.org/collab-maint/tmux.git
 
 Package: tmux
