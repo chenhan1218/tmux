@@ -1,9 +1,12 @@
-tmux (2.0-4) UNRELEASED; urgency=medium
+tmux (2.1~git20150920-1) experimental; urgency=medium
 
+  * New upstream snapshot, from Git commit 983357603a.
+  * Sessions and windows can now be selected exactly with a '=' prefix
+    (closes: #718559).
   * Adjust Homepage control field and watch file; tmux is now hosted on Github.
   * Use cgit URL for Vcs-Browser.
 
- -- Romain Francoise <rfrancoise@debian.org>  Sat, 06 Jun 2015 12:34:34 +0200
+ -- Romain Francoise <rfrancoise@debian.org>  Sun, 20 Sep 2015 11:22:43 +0200
 
 tmux (2.0-3) unstable; urgency=medium
 
