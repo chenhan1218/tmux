@@ -49,15 +49,16 @@ const struct grid_cell grid_default_cell = { 0, 0, 8, 8, (1 << 4) | 1, " " };
 
 int	grid_check_y(struct grid *, u_int);
 
-#ifdef DEBUG
-int
-grid_check_y(struct grid *gd, u_int py)
-{
-	if ((py) >= (gd)->hsize + (gd)->sy)
-		log_fatalx("y out of range: %u", py);
-	return (0);
-}
-#else
+void	grid_reflow_join(struct grid *, u_int *, struct grid_line *, u_int);
+void	grid_reflow_split(struct grid *, u_int *, struct grid_line *, u_int,
+	    u_int);
+void	grid_reflow_move(struct grid *, u_int *, struct grid_line *);
+size_t	grid_string_cells_fg(const struct grid_cell *, int *);
+size_t	grid_string_cells_bg(const struct grid_cell *, int *);
+void	grid_string_cells_code(const struct grid_cell *,
+	    const struct grid_cell *, char *, size_t, int);
+
+/* Check grid y position. */
 int
 grid_check_y(struct grid *gd, u_int py)
 {
@@ -67,16 +68,6 @@ grid_check_y(struct grid *gd, u_int py)
 	}
 	return (0);
 }
-#endif
-
-void	grid_reflow_join(struct grid *, u_int *, struct grid_line *, u_int);
-void	grid_reflow_split(struct grid *, u_int *, struct grid_line *, u_int,
-	    u_int);
-void	grid_reflow_move(struct grid *, u_int *, struct grid_line *);
-size_t	grid_string_cells_fg(const struct grid_cell *, int *);
-size_t	grid_string_cells_bg(const struct grid_cell *, int *);
-void	grid_string_cells_code(const struct grid_cell *,
-	    const struct grid_cell *, char *, size_t, int);
 
 /* Create a new grid. */
 struct grid *
@@ -404,29 +395,29 @@ grid_string_cells_fg(const struct grid_cell *gc, int *values)
 		values[n++] = gc->fg;
 	} else {
 		switch (gc->fg) {
-			case 0:
-			case 1:
-			case 2:
-			case 3:
-			case 4:
-			case 5:
-			case 6:
-			case 7:
-				values[n++] = gc->fg + 30;
-				break;
-			case 8:
-				values[n++] = 39;
-				break;
-			case 90:
-			case 91:
-			case 92:
-			case 93:
-			case 94:
-			case 95:
-			case 96:
-			case 97:
-				values[n++] = gc->fg;
-				break;
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+			values[n++] = gc->fg + 30;
+			break;
+		case 8:
+			values[n++] = 39;
+			break;
+		case 90:
+		case 91:
+		case 92:
+		case 93:
+		case 94:
+		case 95:
+		case 96:
+		case 97:
+			values[n++] = gc->fg;
+			break;
 		}
 	}
 	return (n);
@@ -657,11 +648,12 @@ grid_duplicate_lines(struct grid *dst, u_int dy, struct grid *src, u_int sy,
 
 		memcpy(dstl, srcl, sizeof *dstl);
 		if (srcl->cellsize != 0) {
-			dstl->celldata = xcalloc(
+			dstl->celldata = xreallocarray(NULL,
 			    srcl->cellsize, sizeof *dstl->celldata);
 			memcpy(dstl->celldata, srcl->celldata,
 			    srcl->cellsize * sizeof *dstl->celldata);
-		}
+		} else
+			dstl->celldata = NULL;
 
 		sy++;
 		dy++;

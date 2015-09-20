@@ -57,15 +57,17 @@ char *
 cmd_capture_pane_pending(struct args *args, struct window_pane *wp,
     size_t *len)
 {
-	char	*buf, *line, tmp[5];
-	size_t	 linelen;
-	u_int	 i;
+	struct evbuffer	*pending;
+	char		*buf, *line, tmp[5];
+	size_t		 linelen;
+	u_int		 i;
 
-	if (wp->ictx.since_ground == NULL)
+	pending = input_pending(wp);
+	if (pending == NULL)
 		return (xstrdup(""));
 
-	line = EVBUFFER_DATA(wp->ictx.since_ground);
-	linelen = EVBUFFER_LENGTH(wp->ictx.since_ground);
+	line = EVBUFFER_DATA(pending);
+	linelen = EVBUFFER_LENGTH(pending);
 
 	buf = xstrdup("");
 	if (args_has(args, 'C')) {
@@ -74,7 +76,7 @@ cmd_capture_pane_pending(struct args *args, struct window_pane *wp,
 				tmp[0] = line[i];
 				tmp[1] = '\0';
 			} else
-				xsnprintf(tmp, sizeof tmp, "\\%03o", line[i]);
+				xsnprintf(tmp, sizeof tmp, "\\%03hho", line[i]);
 			buf = cmd_capture_pane_append(buf, len, tmp,
 			    strlen(tmp));
 		}
