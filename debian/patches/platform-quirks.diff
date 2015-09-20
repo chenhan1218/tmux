@@ -38,7 +38,7 @@ Forwarded: not-needed
  
 --- a/compat.h
 +++ b/compat.h
-@@ -187,6 +187,22 @@
+@@ -185,6 +185,22 @@
  #define flock(fd, op) (0)
  #endif
  
@@ -58,6 +58,6 @@ Forwarded: not-needed
 +#define IOV_MAX	1024
 +#endif
 +
- #ifndef HAVE_BZERO
- #undef bzero
- #define bzero(buf, len) memset(buf, 0, len);
+ #ifndef HAVE_CLOSEFROM
+ /* closefrom.c */
+ void	closefrom(int);

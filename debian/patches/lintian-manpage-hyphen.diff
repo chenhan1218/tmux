@@ -4,7 +4,7 @@ Forwarded: not-needed
 
 --- a/tmux.1
 +++ b/tmux.1
-@@ -470,7 +470,7 @@
+@@ -512,7 +512,7 @@
  .Ql -
  may be followed by an offset, for example:
  .Bd -literal -offset indent
@@ -12,8 +12,8 @@ Forwarded: not-needed
 +select-window \-t:+2
  .Ed
  .Pp
- When dealing with a session that doesn't contain sequential window indexes,
-@@ -498,7 +498,7 @@
+ In addition,
+@@ -576,7 +576,7 @@
  .Pp
  Will run:
  .Bd -literal -offset indent
@@ -22,7 +22,7 @@ Forwarded: not-needed
  .Ed
  .Pp
  Additionally, the
-@@ -551,13 +551,13 @@
+@@ -629,13 +629,13 @@
  .Nm
  commands include:
  .Bd -literal -offset indent
@@ -40,7 +40,7 @@ Forwarded: not-needed
  
  bind-key R source-file ~/.tmux.conf \e; \e
  	display-message "source-file done"
-@@ -566,11 +566,11 @@
+@@ -644,11 +644,11 @@
  Or from
  .Xr sh 1 :
  .Bd -literal -offset indent
@@ -55,16 +55,18 @@ Forwarded: not-needed
  .Ed
  .Sh CLIENTS AND SESSIONS
  The
-@@ -1000,7 +1000,7 @@
+@@ -1125,8 +1125,8 @@
  .Pa /tmp
  as well as the paste buffer:
  .Bd -literal -offset indent
+-bind-key -temacs-copy C-w copy-selection -x
 -bind-key -temacs-copy C-q copy-pipe "cat >/tmp/out"
++bind-key \-temacs-copy C-w copy-selection -x
 +bind-key \-temacs-copy C-q copy-pipe "cat >/tmp/out"
  .Ed
  .Pp
  The paste buffer key pastes the first line from the top paste buffer on the
-@@ -1186,7 +1186,7 @@
+@@ -1327,7 +1327,7 @@
  and the result executed as a command.
  If
  .Ar template
@@ -73,7 +75,7 @@ Forwarded: not-needed
  For the meaning of the
  .Fl F
  flag, see the
-@@ -1208,7 +1208,7 @@
+@@ -1349,7 +1349,7 @@
  and the result executed as a command.
  If
  .Ar template
@@ -82,7 +84,7 @@ Forwarded: not-needed
  For the meaning of the
  .Fl F
  flag, see the
-@@ -1255,7 +1255,7 @@
+@@ -1396,7 +1396,7 @@
  Note that
  .Ql %%
  can be used and will be replaced with the session name.
@@ -91,7 +93,7 @@ Forwarded: not-needed
  If
  .Fl c
  is given, will override the default window command.
-@@ -1298,7 +1298,7 @@
+@@ -1439,7 +1439,7 @@
  and the result executed as a command.
  If
  .Ar template
@@ -100,7 +102,7 @@ Forwarded: not-needed
  For the meaning of the
  .Fl F
  flag, see the
-@@ -1609,7 +1609,7 @@
+@@ -1761,7 +1761,7 @@
  option only opens a new pipe if no previous pipe exists, allowing a pipe to
  be toggled with a single key, for example:
  .Bd -literal -offset indent
@@ -109,9 +111,9 @@ Forwarded: not-needed
  .Ed
  .It Xo Ic previous-layout
  .Op Fl t Ar target-window
-@@ -2064,8 +2064,8 @@
+@@ -2303,8 +2303,8 @@
  and be set to any string.
- For example
+ For example:
  .Bd -literal -offset indent
 -$ tmux setw -q @foo "abc123"
 -$ tmux showw -v @foo
@@ -120,7 +122,7 @@ Forwarded: not-needed
  abc123
  .Ed
  .Pp
-@@ -2110,16 +2110,16 @@
+@@ -2347,16 +2347,16 @@
  is appended to the existing setting.
  For example:
  .Bd -literal -offset indent
@@ -141,7 +143,7 @@ Forwarded: not-needed
  .Ed
  .Pp
  Will result in a red background
-@@ -2574,7 +2574,7 @@
+@@ -2776,7 +2776,7 @@
  Examples are:
  .Bd -literal -offset indent
  #(sysctl vm.loadavg)
@@ -150,7 +152,7 @@ Forwarded: not-needed
  .Ed
  .Pp
  By default, UTF-8 in
-@@ -2761,7 +2761,7 @@
+@@ -2963,7 +2963,7 @@
  or with a terminal escape sequence.
  It may be switched off globally with:
  .Bd -literal -offset indent
@@ -159,7 +161,7 @@ Forwarded: not-needed
  .Ed
  .Pp
  .It Ic automatic-rename-format Ar format
-@@ -3510,7 +3510,7 @@
+@@ -3780,7 +3780,7 @@
  and the result executed as a command.
  If
  .Ar template
@@ -168,7 +170,7 @@ Forwarded: not-needed
  For the meaning of the
  .Fl F
  flag, see the
-@@ -3874,29 +3874,29 @@
+@@ -4144,29 +4144,29 @@
  .Pp
  Changing the default prefix key:
  .Bd -literal -offset indent
