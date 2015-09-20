@@ -48,8 +48,6 @@ log_open(const char *path)
 
 	setvbuf(log_file, NULL, _IOLBF, 0);
 	event_set_log_callback(log_event_cb);
-
-	tzset();
 }
 
 /* Close logging. */
@@ -67,16 +65,24 @@ log_close(void)
 void
 log_vwrite(const char *msg, va_list ap)
 {
-	char	*fmt;
+	char		*fmt, *out;
+	struct timeval	 tv;
 
 	if (log_file == NULL)
 		return;
 
-	if (asprintf(&fmt, "%s\n", msg) == -1)
+	if (vasprintf(&fmt, msg, ap) == -1)
 		exit(1);
-	if (vfprintf(log_file, fmt, ap) == -1)
+	if (stravis(&out, fmt, VIS_OCTAL|VIS_CSTYLE|VIS_TAB|VIS_NL) == -1)
+		exit(1);
+
+	gettimeofday(&tv, NULL);
+	if (fprintf(log_file, "%lld.%06d %s\n", (long long)tv.tv_sec,
+	    (int)tv.tv_usec, out) == -1)
 		exit(1);
 	fflush(log_file);
+
+	free(out);
 	free(fmt);
 }
 
