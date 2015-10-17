@@ -119,7 +119,7 @@ retry:
 		fatal("socket failed");
 
 	log_debug("trying connect");
-	if (connect(fd, (struct sockaddr *) &sa, SUN_LEN(&sa)) == -1) {
+	if (connect(fd, (struct sockaddr *) &sa, sizeof(sa)) == -1) {
 		log_debug("connect failed: %s", strerror(errno));
 		if (errno != ECONNREFUSED && errno != ENOENT)
 			goto failed;
@@ -153,15 +153,19 @@ retry:
 		}
 		fd = server_start(base, lockfd, lockfile);
 	}
+
 	if (locked) {
 		free(lockfile);
 		close(lockfd);
 	}
-
 	setblocking(fd, 0);
 	return (fd);
 
 failed:
+	if (locked) {
+		free(lockfile);
+		close(lockfd);
+	}
 	close(fd);
 	return (-1);
 }
