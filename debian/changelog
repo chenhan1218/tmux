@@ -1,3 +1,19 @@
+tmux (2.1-2) unstable; urgency=medium
+
+  * Cherry-pick fixes from upstream Git:
+    + 8c8cddbe02: don't cache key table when looking up keys (closes: #803393)
+    + ddbc4a0f6c: add back default binding for mouse wheel up
+    + a05c27a7e1: unzoom before select-pane -LRUD
+    + 2e2b8a95bd: skip mouse sequences when looking for pastes
+    + 3faa51a0ca: pass output from jobs through format_expand() again
+    + 380a1ea8ef: add back bindings to change window with mouse wheel on
+      status line
+    + 640c6fdd5f: pass mouse events to the correct pane
+    + 3fc001d0a2: scroll the correct pane from mouse bindings
+    + 5577535891: pass through right click to the application
+
+ -- Romain Francoise <rfrancoise@debian.org>  Thu, 05 Nov 2015 18:53:44 +0100
+
 tmux (2.1-1) unstable; urgency=medium
 
   * New upstream release.
