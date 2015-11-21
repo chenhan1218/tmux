@@ -1,3 +1,11 @@
+tmux (2.1-3) unstable; urgency=medium
+
+  * Cherry-pick fixes from upstream Git:
+    + 374e273df5: make paste detection trigger after two characters
+    + 933929cd62: fix a memory leak in if-shell -F
+
+ -- Romain Francoise <rfrancoise@debian.org>  Sat, 21 Nov 2015 19:47:32 +0100
+
 tmux (2.1-2) unstable; urgency=medium
 
   * Cherry-pick fixes from upstream Git:
